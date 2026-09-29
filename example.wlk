@@ -1,6 +1,15 @@
 class Nave{
       var velocidad
       var direccion
+      var combustible 
+
+      method cargarCombustible(cantidad){
+          combustible = combustible + cantidad
+      }
+
+      method descargarCombustible(cantidad){
+          combustible = combustible - cantidad
+      }
 
       method saberVelocidad(){
           return velocidad
@@ -39,7 +48,8 @@ class Nave{
       }
 
       method prepararViaje(){
-       
+        self.cargarCombustible(30000)
+        self.acelerar(5000)
        }
 
 
@@ -63,7 +73,7 @@ class NaveBaliza inherits Nave{
 }
 
 class NavePasajeros inherits Nave{
-    const cantidadDePasajeros
+    const cantidadDePasajeros = 0
     var racionesDeBebida
     var racionesDeComida
 
@@ -82,6 +92,16 @@ class NavePasajeros inherits Nave{
     method descargarRacionesDeComida(cantidad){
         racionesDeComida -= cantidad
     }
+
+    override method prepararViaje(){
+        self.cargarRacionesDeBebida(6)
+        self.cargarRacionesDeComida(4)
+        self.acercarseUnPocoAlSol()
+    }
+
+
+
+
 }
 
 class NavesDeCombate inherits Nave{
@@ -145,10 +165,28 @@ class NavesDeCombate inherits Nave{
   }
 
   method emitioMensaje(mensaje){
-    //return mensajes (?)
+    return mensajes.any(mensaje)
   }
 
+  override method prepararViaje(){
+    self.replegarMisiles()
+    self.acelerar(15000 )
+    self.emitirMensaje("Saliendo en misión")
+  }
 
+}
 
+class NaveHospital inherits NavePasajeros{
+  
+  var tienePreparadoQuirofano = false
 
+  method prepararQuirofano(){
+    tienePreparadoQuirofano = true
+  }
+
+}
+
+class NaveCombateSigilosa inherits NavesDeCombate{
+  
+  
 }
