@@ -2,6 +2,21 @@ class Nave{
       var velocidad
       var direccion
       var combustible 
+      var tranquilidad = true
+
+
+      method estaTranquila(){
+       
+          if ((combustible > 4000) and (velocidad < 12000)){
+              tranquilidad = true
+          }
+          else{
+              tranquilidad = false
+          }
+          return tranquilidad
+      }
+
+
 
       method cargarCombustible(cantidad){
           combustible = combustible + cantidad
@@ -68,6 +83,15 @@ class NaveBaliza inherits Nave{
         self.ponerseParaleloAlSol()
     }
 
+    override method estaTranquila(){
+      if (baliza != "rojo"){
+        tranquilidad = false
+      }
+      else{
+        tranquilidad = true
+      }
+      return tranquilidad
+    }
 
 
 }
@@ -173,6 +197,16 @@ class NavesDeCombate inherits Nave{
     self.acelerar(15000 )
     self.emitirMensaje("Saliendo en misión")
   }
+
+     override method estaTranquila(){
+      if (self.misilesDesplegados()){
+        tranquilidad = false
+      }
+      else{
+        tranquilidad = true
+      }
+      return tranquilidad
+    }
 
 }
 
